@@ -17,7 +17,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            int pad = (int) (24 * getResources().getDisplayMetrics().density); // 24dp converted to pixels
+            v.setPadding(systemBars.left + pad, systemBars.top + pad, systemBars.right + pad, systemBars.bottom + pad);;
             return insets;
         });
     }
