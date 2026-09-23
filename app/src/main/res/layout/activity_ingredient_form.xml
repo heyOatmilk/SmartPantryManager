@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:background="#F7F8F3">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="vertical" android:padding="24dp">
+
+        <TextView android:id="@+id/tvFormTitle" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:layout_marginTop="24dp"
+            android:text="Add Ingredient" android:textColor="#2F5D50"
+            android:textSize="28sp" android:textStyle="bold" />
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginTop="6dp" android:text="Add an item currently available in your pantry."
+            android:textColor="#666666" android:textSize="15sp" />
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginTop="32dp" android:text="Ingredient Name:"
+            android:textColor="#333333" android:textSize="15sp" android:textStyle="bold" />
+
+        <EditText android:id="@+id/etIngredientName" android:layout_width="match_parent"
+            android:layout_height="56dp" android:layout_marginTop="8dp" android:backgroundTint="#2F5D50"
+            android:hint="e.g. Tomatoes" android:inputType="textCapWords" android:padding="12dp"
+            android:singleLine="true" android:textColor="#222222" android:textColorHint="#8A8A8A" />
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginTop="24dp" android:text="Quantity:" android:textColor="#333333"
+            android:textSize="15sp" android:textStyle="bold" />
+
+        <EditText android:id="@+id/etQuantity" android:layout_width="match_parent"
+            android:layout_height="56dp" android:layout_marginTop="8dp" android:backgroundTint="#2F5D50"
+            android:hint="e.g. 5" android:inputType="numberDecimal" android:padding="12dp"
+            android:singleLine="true" android:textColor="#222222" android:textColorHint="#8A8A8A" />
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginTop="24dp" android:text="Unit:" android:textColor="#333333"
+            android:textSize="15sp" android:textStyle="bold" />
+
+        <AutoCompleteTextView android:id="@+id/unitDropdown" android:layout_width="match_parent"
+            android:layout_height="56dp" android:layout_marginTop="8dp" android:backgroundTint="#2F5D50"
+            android:hint="Select unit" android:inputType="none" android:paddingStart="12dp"
+            android:paddingEnd="12dp" android:textColor="#222222" android:textColorHint="#777777"
+            android:textSize="16sp" />
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_marginTop="24dp" android:text="Expiry date (optional):" android:textColor="#333333"
+            android:textSize="15sp" android:textStyle="bold" />
+
+        <EditText android:id="@+id/etExpiryDate" android:layout_width="match_parent"
+            android:layout_height="56dp" android:layout_marginTop="8dp" android:backgroundTint="#2F5D50"
+            android:focusable="false" android:hint="Select expiry date" android:padding="12dp"
+            android:textColor="#222222" android:textColorHint="#8A8A8A" />
+
+        <Button android:id="@+id/btnSaveIngredient" android:layout_width="match_parent"
+            android:layout_height="58dp" android:layout_marginTop="36dp" android:backgroundTint="#2F5D50"
+            android:text="Save Ingredient" android:textAllCaps="false" android:textColor="#FFFFFF"
+            android:textSize="17sp" android:textStyle="bold" />
+
+    </LinearLayout>
+</ScrollView>

@@ -56,7 +56,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return result;
     }
 
-    // Return every pantry item, sorted alphabetically by name.
+    // Returns every pantry item, sorted alphabetically by name.
     public List<PantryItem> getAllPantryItems() {
         List<PantryItem> out = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
@@ -74,5 +74,37 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         c.close();
         db.close();
         return out;
+    }
+
+    // Loads a single pantry item by its database ID, used when editing.
+    public PantryItem getPantryItem(int id) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor c = db.query(TABLE_PANTRY, null, COLUMN_ID + "=?",
+                new String[]{String.valueOf(id)}, null, null, null);
+        PantryItem item = null;
+        if (c.moveToFirst()) {
+            item = new PantryItem(id,
+                    c.getString(c.getColumnIndexOrThrow(COLUMN_NAME)),
+                    c.getDouble(c.getColumnIndexOrThrow(COLUMN_QUANTITY)),
+                    c.getString(c.getColumnIndexOrThrow(COLUMN_UNIT)),
+                    c.getString(c.getColumnIndexOrThrow(COLUMN_EXPIRY)));
+        }
+        c.close();
+        db.close();
+        return item;
+    }
+
+    // Updates an existing pantry item's values, matched by its ID.
+    public int updatePantryItem(PantryItem item) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues v = new ContentValues();
+        v.put(COLUMN_NAME, item.getName());
+        v.put(COLUMN_QUANTITY, item.getQuantity());
+        v.put(COLUMN_UNIT, item.getUnit());
+        v.put(COLUMN_EXPIRY, item.getExpiryDate());
+        int rows = db.update(TABLE_PANTRY, v, COLUMN_ID + "=?",
+                new String[]{String.valueOf(item.getId())});
+        db.close();
+        return rows;
     }
 }
