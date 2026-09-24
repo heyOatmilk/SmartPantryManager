@@ -107,4 +107,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return rows;
     }
+
+    // Deletes a pantry item by its database ID. Returns the number of rows deleted.
+    public int deletePantryItem(int id) {
+        SQLiteDatabase db = getWritableDatabase();
+        int rows = db.delete(TABLE_PANTRY, COLUMN_ID + "=?", new String[]{String.valueOf(id)});
+        db.close();
+        return rows;
+    }
 }

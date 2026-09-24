@@ -6,7 +6,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.smartpantrymanager.database.DatabaseHelper;
@@ -33,6 +35,28 @@ public class PantryActivity extends AppCompatActivity {
         databaseHelper = new DatabaseHelper(this);
 
         add.setOnClickListener(v -> startActivity(new Intent(this, IngredientFormActivity.class)));
+
+        listPantry.setOnItemClickListener((parent, view, position, id) -> {
+            PantryItem item = (PantryItem) parent.getItemAtPosition(position);
+            Intent intent = new Intent(this, IngredientFormActivity.class);
+            intent.putExtra("ITEM_ID", item.getId());
+            startActivity(intent);
+        });
+
+        listPantry.setOnItemLongClickListener((parent, view, position, id) -> {
+            PantryItem item = (PantryItem) parent.getItemAtPosition(position);
+            new AlertDialog.Builder(this)
+                    .setTitle("Delete Ingredient")
+                    .setMessage("Are you sure you want to delete " + item.getName() + "?")
+                    .setNegativeButton("Cancel", null)
+                    .setPositiveButton("Delete", (d, w) -> {
+                        if (databaseHelper.deletePantryItem(item.getId()) > 0) {
+                            Toast.makeText(this, "Ingredient deleted", Toast.LENGTH_SHORT).show();
+                            loadPantryItems();
+                        }
+                    }).show();
+            return true;
+        });
     }
 
     @Override
